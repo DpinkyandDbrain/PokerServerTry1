@@ -19,38 +19,43 @@ class Card:
 class Deck:
 
     suits = ['DI', 'HE', 'SP', 'CL']
-    values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-    deck = [52]
+    values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+    deck = []
 
     def __init__(self):
-        for c in range(0, 51):
+        for c in range(0, 52):
+            print 'Using ' + str(c % 4) + ' with ' + str(c % 13)
             self.suit = self.suits[c % 4]
-            self.deck[c] = Card(self.suit, self.values[c % 13])
+            self.deck.append(Card(self.suit, self.values[c % 13]))
 
-    def shuffle(self):
-            numcards = random.randint(0, 51)
-            print "Number of cards to shuffle" + numcards
-            for i in range(0, numcards):
-                choice1 = random.randint(1, 52)
-                choice2 = random.randint(1, 52)
-                if choice1 != choice2:
-                    card1 = self.deck[choice1]
-                    card2 = self.deck[choice2]
-                    print "Switching " + card1 + " with " + card2
-                    self.deck[choice1] = card2
-                    self.deck[choice2] = card1
+    def shuffle(self, usePrint):
+        numcards = random.randint(0, 51)
+        if usePrint:
+            print "Number of cards to shuffle " + str(numcards)
+        for i in range(0, numcards - 1):
+            choice1 = random.randint(0, 51)
+            choice2 = random.randint(0, 51)
+            if choice1 != choice2:
+                if usePrint:
+                    print 'Switching card ' + str(choice1) + ' with card ' + str(choice2)
+                self.deck[choice1], self.deck[choice2] = self.deck[choice2], self.deck[choice1]
+
+    def __str__(self):
+        printer = ''
+        for card in self.deck:
+            printer += str(card)
+        return printer
 
 
 class DeckDealer:
     def __init__(self):
         deck = Deck()
         print deck
-        deck.shuffle()
-        deck.shuffle()
-        deck.shuffle()
-        deck.shuffle()
+        deck.shuffle(False)
+        deck.shuffle(False)
+        deck.shuffle(False)
+        deck.shuffle(False)
         print deck
 
 if __name__ == '__main__':
     app = DeckDealer()
-    app.MainLoop()
