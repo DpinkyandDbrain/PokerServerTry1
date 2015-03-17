@@ -18,19 +18,21 @@ class Card:
 
 class Deck:
 
-    suits = ['DI', 'HE', 'SP', 'CL']
+    suits = ['SP', 'DI', 'HE', 'CL']
     values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     deck = []
 
-    def __init__(self):
+    def __init__(self, usePrint):
+        self.usePrint = usePrint
         for c in range(0, 52):
-            print 'Using ' + str(c % 4) + ' with ' + str(c % 13)
+            if self.usePrint:
+                print 'Using ' + str(c % 4) + ' with ' + str(c % 13)
             self.suit = self.suits[c % 4]
             self.deck.append(Card(self.suit, self.values[c % 13]))
 
-    def shuffle(self, usePrint):
+    def shuffle(self):
         numcards = random.randint(0, 51)
-        if usePrint:
+        if self.usePrint:
             print "Number of cards to shuffle " + str(numcards)
         for i in range(0, numcards - 1):
             choice1 = random.randint(0, 51)
@@ -49,12 +51,12 @@ class Deck:
 
 class DeckDealer:
     def __init__(self):
-        deck = Deck()
+        deck = Deck(False)
         print deck
-        deck.shuffle(False)
-        deck.shuffle(False)
-        deck.shuffle(False)
-        deck.shuffle(False)
+        deck.shuffle()
+        deck.shuffle()
+        deck.shuffle()
+        deck.shuffle()
         print deck
 
 if __name__ == '__main__':
