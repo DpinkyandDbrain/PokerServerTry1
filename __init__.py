@@ -25,7 +25,7 @@ try:
 	print 'Started httpserver on port ' , PORT_NUMBER													
 	#Wait forever for incoming htto requests
 	server.serve_forever()
-	room = Room()
+	room = Room(2)
 except KeyboardInterrupt:
 	print 'Interrupt received, shutting down the web server'
 	server.socket.close()
