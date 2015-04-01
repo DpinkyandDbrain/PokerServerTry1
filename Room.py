@@ -1,7 +1,8 @@
-#!/usr/bin/python
+import Table
+
 
 class Room:
-	tables = []
-	__init__(self, tablenum):
-		for x in range(0,tablenum):
-			tables[x] = Table()
+
+    def __init__(self, tablenum):
+        for x in range(0, tablenum):
+            self.tables[x] = Table()
